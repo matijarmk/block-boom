@@ -24,10 +24,10 @@ export class MenuModalComponent implements OnInit, OnDestroy {
         Validators.min(5),
         Validators.max(10)
       ]),
-      rows: new FormControl(parseInt(localStorage.getItem('rows'), 0) || 10, [
+      rows: new FormControl(parseInt(localStorage.getItem('rows'), 0) || 15, [
         Validators.required,
         Validators.min(5),
-        Validators.max(10)
+        Validators.max(20)
       ]),
       speed: new FormControl(parseInt(localStorage.getItem('speed'), 0) || 30, [
         Validators.required,
