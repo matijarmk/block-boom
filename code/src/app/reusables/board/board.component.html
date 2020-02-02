@@ -1,0 +1,63 @@
+<div class="d-flex flex-column h-100">
+
+  <div class="h2 d-flex flex-row justify-content-between">
+    <div class="text-center">
+      Level: {{level}}
+    </div>
+    <div class="text-center">
+      Score: {{score}}
+    </div>
+    <div class="text-center">Next:
+      <div class="px-2 py-1 d-inline-block"
+           [ngStyle]="{'background':colors[randomNumbers[1]]}">
+        {{randomNumbers[1]}}
+      </div>
+    </div>
+  </div>
+
+  <div class="card w-100 flex-grow-1">
+    <div class="card-header">
+      {{boardName}}
+    </div>
+    <div class="card-body d-flex flex-column p-0">
+      <table class="table table-bordered h-100">
+        <tbody>
+          <tr *ngFor="let row of boardNumbers;  let i=index; let first=first">
+            <td *ngFor="let num of row; let j=index"
+                [ngStyle]="{'background-color': colors[boardRow]}"
+                class="p-0">
+              <ng-container *ngIf="first">
+                <div class="h-25"
+                     [ngClass]="{'bg-danger':currentIndex===j}"></div>
+              </ng-container>
+              <div class="d-flex justify-content-center align-items-center flex-column"
+                   [ngClass]="{'h-75':first, 'h-100':!first}"
+                   [ngStyle]="{'filter':i === currentRowIndex && j===currentIndex?'drop-shadow(rgba(0, 0, 0, 0.9) 6px 5px 8px)':'','background':i === currentRowIndex && j===currentIndex ? colors[randomNumbers[0]] : num!==0?(num!==colors.length-1?getRemainingColors(num):colors[colors.length-1]):colors[0]}">
+                <ng-container [ngSwitch]="i === currentRowIndex && j===currentIndex">
+                  <ng-container *ngSwitchCase="true">
+                    <h2>{{randomNumbers[0]}}</h2>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="false">
+                    <h2 [ngStyle]="{'color': num===0?'transparent':'black'}">
+                      {{num}}
+                    </h2>
+
+                  </ng-container>
+                </ng-container>
+
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="h2 d-flex flex-row justify-content-between">
+    <div></div>
+    <div class="text-center">
+      <button class="btn btn-primary"
+              (click)="end()">Start new game</button>
+
+    </div>
+  </div>
+</div>
